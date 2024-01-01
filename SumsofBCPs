@@ -1,3 +1,7 @@
+%I sadly had to cut my favourite result from my master's thesis. The result didn't quite flow with the other material and my thesis was already 150+ pages, so adding more would be nothing short of torturing my examining committee. However, I wanted to get it out to the world so I gave a talk on it at the U of M's Graduate Math Seminar Series and am posting the latex code here!
+
+%The result relates complementary pairs (a type of orthogonal pairs of polynomials) to symmetry and coprimitivity. Complementary pairs have many applications in engineering and math, such as in radar, spectroscopy, and in the construction of Hadamard matrices. However, their mathematical structure is very mysterious! In particular, most known complementary pairs were found by computer or constructed from pairs found by computer. We don't really know why they should exist!
+
 \documentclass [12pt,letterpaper]{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
