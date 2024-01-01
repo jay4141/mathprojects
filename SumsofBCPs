@@ -1,0 +1,294 @@
+\documentclass [12pt,letterpaper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{url}
+\usepackage{rotating}
+\usepackage{setspace}
+\usepackage{mathrsfs}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage[english]{babel}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{cases}
+\usepackage{mathabx}
+\usepackage{environ}
+\usepackage{epstopdf}
+\usepackage{cleveref}
+\usepackage{xspace}
+\usepackage{float}
+\usepackage{imakeidx}
+\usepackage{esvect}
+%The next few lines are the TOC stuff
+\usepackage{ifthen}
+\usepackage{blindtext}
+\usepackage{eso-pic}
+\usepackage{thmtools}
+
+%%use siunitx and its S type columns to align the numbers at the decimal separators
+\usepackage{siunitx}
+%%lining around an array
+\usepackage{booktabs}
+\usepackage{amsopn}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\rank}{rank}
+\newcommand{\Ai}{\mathscr{A}_1}
+\newcommand{\Aii}{\mathscr{A}_2}
+\newcommand{\Ae}{\mathscr{A}_i}
+\newcommand{\As}{\mathscr{A}}
+\newcommand{\Rc}{\mathcal{R}}
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\Ec}{\mathcal{E}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\maxdeg}{\mbox{maxdeg}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\MATLAB}{\textsc{Matlab}\textsuperscript{\textregistered}\xspace}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\crc}{\mbox{\rm circ}}
+\newcommand{\dint}{\mbox{dint}}
+
+
+
+\DeclareMathOperator{\uh}{\hat{u}}
+\DeclareMathOperator{\vh}{\hat{v}}
+\DeclareMathOperator{\ph}{\hat{p}}
+\DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
+\DeclareMathOperator{\Ao}{\mathcal{A}}
+\DeclareMathOperator{\Bo}{\mathcal{B}}
+\DeclareMathOperator{\Qf}{\mathfrak{M}}
+
+%%%%
+\newcommand{\scC}{\mathscr C}
+\newcommand{\cA}{\mathcal A}
+\newcommand{\cE}{\mathcal E}
+\newcommand{\ce}{\mathfrak e}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\cG}{\mathcal G}
+\newcommand{\cL}{\mathcal L}
+\newcommand{\cM}{\mathcal M}
+\newcommand{\cO}{\mathcal O}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cS}{\mathcal S}
+\newcommand{\cT}{\mathcal T}
+\newcommand{\cU}{\mathcal U}
+\newcommand{\ba}{\mathbf a}
+\newcommand{\bb}{\mathbf b}
+\newcommand{\bc}{\mathbf c}
+\newcommand{\bd}{\mathbf d}
+\newcommand{\be}{\mathbf e}
+\newcommand{\bk}{\mathbf k}
+\newcommand{\bi}{\mathbf i}
+\newcommand{\bj}{\mathbf j}
+\newcommand{\br}{\mathbf r}
+\newcommand{\bu}{\mathbf u}
+\newcommand{\bv}{\mathbf v}
+\newcommand{\bx}{\mathbf x}
+\newcommand{\by}{\mathbf y}
+\newcommand{\bz}{\mathbf z}
+
+\newcommand{\wtA}{\widetilde A}
+\newcommand{\wtE}{\widetilde E}
+\newcommand{\wtC}{\widetilde C}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+%\usepackage{xparse}\let\oldexample\example\RenewDocumentCommand{\example}{o}{%\IfNoValueTF{#1}{\oldexample}{\oldexample[#1]}%\normalfont\qed}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{observation}[theorem]{Observation}
+
+\declaretheoremstyle[
+  spaceabove=\parsep, spacebelow=\parsep,
+  headfont=\bfseries,
+  notefont=\mdseries, notebraces={(}{)},
+  bodyfont=\normalfont,
+  postheadspace=1em,
+  qed=\qedsymbol
+]{mythmstyle}
+\declaretheorem[style=mythmstyle, numberwithin=section]{example}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
+\doublespacing
+\title{Sums of Boolean Complementary Pairs}
+\author{Jared Gobin}
+\date{\today \\\vspace{1cm} \small Research graciously funded by the UMFGS and Dr David Gunderson}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}Boolean complementary pairs ($BCP$s) are pairs of polynomials $f(x), g(x) \in \Z_2[x,x^{-1}]$ that satisfy $f(x)f(x^{-1})+g(x)g(x^{-1})=\lambda \in \Z_2$. $BCP$s were introduced by Craigen \cite{CraigenBCPs} to help unveil the mystery of a related object called ternary complementary pairs. Complementary pairs have many applications across engineering and mathematics (radar, device synchronization, in the construction of Hadamard matrices ... ), but their mathematical structure is frustratingly mysterious. Very rarely are there instances where one can say, "this is why one should exist". Most of the known complementary pairs were obtained by computer search.
+
+\paragraph{}Craigen solved the structure of even-weight $BCP$s and found an algebraic factorization of odd-weight $BCP$s with his student Woodford. Upon beginning research for my thesis, I realized that this factorization had beautiful algebraic structure and much more application than originally perceived! Despite this, all questions about what these factorizations could tell us about $BCP$s led to dead ends ... except for one: "which polynomials $d(x)$ are of the form $d(x)=f(x)+g(x)$, where $(f(x),g(x))$ is a $BCP$?" turns out to be a completely answerable question with a surprising amount of structure! I sadly cut the answer to this question from my thesis because my thesis was already $150+$ pages without the result and I felt like I would be torturing my examining committee by including more. (My thesis can be found under my master's degree in the education section on LinkedIn.)
+
+
+
+\section{Brief review of $BCP$s}
+This section contains all the background needed to setup and prove the next section's results. I'm rarely going to go into detail about anything here, you can check out the motivation and explanation for everything in my thesis.
+
+\begin{definition}
+ Let $f(x), g(x) \in \Z_2[x,x^{-1}]$. Then $(f(x),g(x))$ is a \textbf{Boolean complementary pair} iff $\exists \lambda \in \Z_2$ such that $$f(x)f(x^{-1})+g(x)g(x^{-1})=\lambda.$$ The number of nonzero coefficients of $x$ in $f(x)$ plus the number of nonzero coefficients of $x$ in $g(x)$ is the \textbf{weight} of the pair. 
+\end{definition}
+
+\begin{example}
+    Let $f(x)=x^{-1}+x+x^3$ and $g(x)=x^5+x^9$. Then \begin{equation*}
+        \begin{split}
+            f(x)f(x^{-1})+g(x)g(x^{-1})&=(x^{-1}+x+x^3)(x+x^{-1}+x^{-3})\\&\phantom{=}+(x^5+x^9)(x^{-5}+x^{-9})\\
+            &=1+x^{-2}+x^{-4}+x^2+1+x^{-2}+x^4+x^2+1\\
+            &\phantom{=}+1+x^{-4}+x^4+1\\
+            &=5+2(x^{-4}+x^{-2}+x^2+x^4)\\
+            &=1+0\\
+            &=1.
+        \end{split}
+    \end{equation*} Therefore, $(f(x),g(x))$ is a $BCP$ with weight $3+2=5$ (so $(f(x),g(x))$ is an odd-weight pair).
+\end{example}
+
+\begin{definition}
+    Let $f(x), g(x) \in \Z_2[x,x^{-1}]$. The \textbf{pair matrix} of $(f(x),g(x))$ is $$PM(f(x),g(x)):=\begin{pmatrix}
+        f(x)&g(x)\\g(x^{-1})&f(x^{-1})
+    \end{pmatrix}.$$
+\end{definition}
+
+
+\begin{definition}
+    Let $f(x), g(x) \in \Z_2[x,x^{-1}]$. Define the \textbf{conjugate} of $f(x)$ to be $f^*(x):=f(x^{-1})$, and define the conjugate of $PM(f(x),g(x))$ to be $PM(f(x),g(x))^*:=PM(f^*(x),g(x))$ (i.e. transpose the matrix and conjugate every entry).
+\end{definition}
+
+% The whole point of this "$*$" business is to make notation a bit easier. For instance, $f(x)$ shall be written simply as $f$ and $f(x^{-1})$ shall be written as $f^*$ when no confusion can arise. 
+
+% Thus $f(x)f(x^{-1})+g(x)g(x^{-1})$ can be written as $(ff^*+gg^*)(x)$.
+
+\begin{lemma}
+    Let $f,g,r,s \in \Z_2[x,x^{-1}]$. Then $$\left(PM(f,g)PM(r,s)\right)^*=PM(r^*,s)PM(f^*,g).$$
+\end{lemma}
+
+\begin{proof}
+    Direct verification.
+\end{proof}
+
+\begin{definition}
+    Let $f(x)\in \Z_2[x,x^{-1}]$. Then $f(x)$ is \textbf{symmetric-equivalent} iff $\exists t\in \Z$ such that $f(x)=x^tf^*(x)$.
+\end{definition}
+
+\begin{theorem}\label{thm:self-fac}
+    Let $f(x) \in \Z_2[x,x^{-1}]$. There exists an odd-weight $BCP$ $(r(x),s(x))$, a symmetric-equivalent $h(x) \in \Z_2[x,x^{-1}]$, and $c\in \Z$ such that $$PM(f(x),g(x))=PM(h(x),x^ch(x))PM(r(x),s(x)).$$
+\end{theorem}
+
+\begin{proof}
+    Use Corollary 6.4.1 (page 108) in my thesis and pre-multiply everything by $PM(1,1)$ to get the result.
+\end{proof}
+
+
+% \begin{definition}
+%     Let $a,b \in \Z$. Then $$V_{a,b}:=PM(x^{-a}+1+x^a,x^{-a}+x^a).$$
+% \end{definition}
+
+% \begin{definition}
+%     Let $b,d \in \Z$, $n\in \Z^+$, and $f(x)=x^b\sum_{i=0}^nf_ix^i,g(x)=x^d\sum_{i=0}^ng_ix^i \in \Z_2[x,x^{-1}]$ with $f_0, g_0$ nonzero. The \textbf{offset} of $(f(x),g(x))$ is $d-b$, i.e. the difference in their least powers of $x$.
+% \end{definition}
+
+% \begin{example}
+%     The pair $\left(f(x),g(x)\right)=\left(x^{-1}+x+x^3,x^5+x^9\right)$ has offset $5-(-1)=6$.
+% \end{example}
+
+
+\section{Sums of $BCP$s}
+\begin{definition}
+    Let $d(x)\in \Z_2[x,x^{-1}]$. Then $d(x)$ is the \textbf{sum of a} $BCP$ iff $\exists$ a $BCP$ $(r(x),s(x))$ such that $d(x)=r(x)+s(x)$.
+\end{definition}
+
+So ... why \textit{sums} of $BCP$s? Why should one care about them? Well, because we are working in $\Z_2[x,x^{-1}]$, the sum of a $BCP$ represents all the places where the two polynomials differ from one another. For instance, take $r(x)=1+x+x^2$ and $s(x)=1+x^2$. Then by defining $d(x):=r(x)+s(x)=(1+x+x^2)+(1+x^2)=x + 2(1+x^2)=x$, one sees that $d(x)=x$ tells us that $r(x)$ and $s(x)$ differ in exactly one place, that is, at $x$. They have the same coefficients everywhere else. (You may also be wondering why I am suddenly using $r(x)$ and $s(x)$ instead of $f(x)$ and $g(x)$ for $BCP$s. This is because I will eventually be doing some sneaky things with $BCP$s and sums of $BCP$s all in one place, so there is a need to separate the two.)
+
+
+
+\begin{theorem}\label{thm:sum}
+    Let $d(x)\in \Z_2[x,x^{-1}]$. Then \begin{enumerate}
+        \item $d(x)$ is the sum of an odd-weight $BCP$ if and only if $d(x)$ has no symmetric-equivalent non-unit factors.
+        \item $d(x)$ is the sum of an even-weight $BCP$ if and only if $d(x)$ is divisible by $x+1$.
+        \item Define $\psi(x)$ and $\phi(x)$ by $$PM(\psi(x),\psi^*(x))=PM(x^{i},x^{-i})PM(r(x),s(x))$$
+    $$PM(\phi(x),\phi^*(x))=PM(x^{j},x^{-j})PM(r(x),s(x)).$$ If $i \neq j$, then $\psi(x)$ and $\phi(x)$ are coprime.
+    \end{enumerate} 
+\end{theorem}
+
+Thus a polynomial being the sum of an odd-weight $BCP$ is equivalent to that polynomial having no symmetric factors (other than units)! The even-weight case is simpler: whether or not $x+1$ divides something is the entire deciding factor. As for part 3, it is quite interesting that two polynomials that are so similar on the matrix level are coprime on the polynomial level! 
+
+\begin{proof}
+  \hfill  \begin{enumerate}
+        \item  ($\Rightarrow$) Suppose $(r(x),s(x))$ is a odd-weight $BCP$ and $d(x)=r(x)+s(x)$ has a symmetric-equivalent divisor $h(x)$ such that $h(x)= x^bh^*(x)$. Let $k(x)\in \Z_2[x,x^{-1}]$ be such that $r(x)+s(x)=h(x)k(x)$. Then  \begin{equation*}
+    \begin{split}
+        r(x)r^*(x)+s(x)s^*(x)&=r(x)r^*(x)+(r(x)+h(x)k(x))(r(x)+h(x)k(x))^*\\
+        &= 2r(x)r^*(x)+r(x)h^*(x)k^*(x)+r^*(x)h(x)k(x)+h(x)h^*(x)k(x)k^*(x)\\
+        &= x^{-b}r(x)h(x)k^*(x)+r(x)^*h(x)k(x)+h(x)h^*(x)k(x)k^*(x)\\
+        &=h(x)(x^{-b}r(x)k^*(x)+r^*(x)k(x)+h(x)^*k(x)k^*(x))\\
+        &=1.
+    \end{split}
+\end{equation*}
+Therefore, $h(x)$ is a unit.
+
+\paragraph{}($\Leftarrow$) Let $d(x)$ have no non-unit symmetric-equivalent divisors. Then $(d(x),d^*(x))$ is an even-weight $BCP$, and thus by Theorem \ref{thm:self-fac}, there exists a symmetric-equivalent $h(x)$, integer $c$ with $x^ch(x)=h^*(x)$, and an odd-weight complementary pair $(r(x),s(x))$ such that $$PM(d(x),d^*(x))=PM(h(x),x^ch(x))PM(r(x),s(x)).$$  Therefore, $d(x)=h(x)r(x)+x^ch(x)s(x)^*=h(x)(r(x)+x^cs^*(x))$, and thus $h(x)$, a symmetric-equivalent polynomial, divides $d(x)$. Therefore, $h(x)$ is a unit and hence there exists some integer $i$ such that $h(x)=x^{i}$. As $x^ch(x)=h^*(x)=x^{-i}$, $$PM(d(x),d^*(x))=PM(x^{i},x^{-i})PM(r(x),s(x))$$ and $d(x)=x^{i}r(x)+x^{-i}s^*(x)$. The pair $(x^{i}r(x),x^{-i}s^*(x))$ is a odd-weight $BCP$, hence the result is proved.
+
+\item $(\Rightarrow)$ Suppose $(r(x),s(x))$ is an even-weight $BCP$ such that $d(x)=r(x)+s(x)$. Then since $(r(x),s(x))$ has even weight, $d(1)=r(1)+s(1)=0$. Therefore, $(x+1) \mid d(x)$.
+\newline $(\Leftarrow)$ Suppose $(x+1) \mid d(x)$. Let $h(x)\in \Z_2[x,x^{-1}]$ be such that $d(x)=(x+1)h(x)=xh(x)+h(x)$. Since $$xh(x)(xh(x))^*+h(x)h^*(x)=xh(x)x^{-1}h^*(x)+h(x)h^*(x)=2h(x)h^*(x)=0,$$ $(xh(x),h(x))$ is an even-weight $BCP$. Therefore, $d(x)=xh(x)+h(x)$ is the sum of the even-weight $BCP$ $(xh(x),h(x))$. 
+\item Note that $$PM(\phi^*(x),\phi^*(x))=PM(r^*(x),s(x))PM(x^{-j},x^{-j}).$$ Therefore,
+   \begin{equation*}
+       \begin{split}
+           PM(\psi(x),\psi^*(x))PM(\phi^*(x),\phi^*(x))&=PM(x^{i},x^{-i})PM(r(x),s(x))\\&\phantom{=}\cdot PM(r^*(x),s(x))PM(x^{-j},x^{-j})\\
+           &=PM(x^{i},x^{-i})PM(x^{-j},x^{-j})\\
+           &=PM(x^{i -j}+x^{-i +j},x^{i -j}+x^{-i +j})\\
+           &=PM(\psi(x) \phi^*(x)+\psi^*(x)\phi(x) ,\psi(x) \phi^*(x)+\psi^*(x)\phi(x) ).
+       \end{split}
+   \end{equation*}
+Thus $\psi (x)\phi^*(x)+\psi^*(x)\phi(x) =x^{i -j}(1+x^{2(j-i)})=x^{i -j}(1+x)^{2(j-i)}$. Let $g(x)=\gcd(\psi(x),\phi(x))$ and $h(x),k(x) \in \Z_2[x,x^{-1}]$ such that $\psi(x)=g(x)h(x)$ and $\phi(x)=g(x)k(x)$. Then \begin{equation*}
+    \begin{split}
+        \psi(x) \phi^*(x)+\psi^*(x)\phi(x)&=g(x)h(x)g^*(x)k^*(x)+g^*(x)h^*(x)g(x)h(x)\\
+        &=g(x)g^*(x)(h(x)k^*(x)+h^*(x)k(x))\\
+        &=x^{i -j}(1+x)^{2(j-i)}.
+    \end{split}
+\end{equation*} 
+Since $\Z_2[x,x^{-1}]$ is a unique factorization domain, the only potential factors of $g(x)$ are units and powers of $x+1$. Since $g(1)=1$, $x+1$ does not divide $g(x)$ and thus $g(x)$ a unit and $\psi(x)$ and $\phi(x)$ are coprime.
+\end{enumerate}
+
+
+\end{proof}
+
+% \paragraph{} The reason why these two results are my favourites is that there is this connection between complementarity, symmetry, and co-primeness all in one place! 
+
+%$$PM(\psi,\psi^*)=PM(x^{i},x^{-i})PM(r,s)$$ and $$PM(\phi,\phi^*)=PM(x^{j},x^{-j})PM(r,s).$$
+
+
+\paragraph{}Part 3 of Theorem \ref{thm:sum} raises an interesting question: start with two arbitrary polynomials $r(x),s(x) \in \Z_2[x,x^{-1}]$.  If for any distinct integers $i$ and $j$, one has that $x^ir(x)+x^{-i}s^*(x)$ and $x^jr(x)+x^{-j}s^*(x)$ are coprime, then is $(r(x),s(x))$ an odd-weight $BCP$? If true, I think this would blow the doors open on not only Boolean complementary pairs, but complementary pairs in general! That complementarity is so strongly related to co-primitivity would surely help unveil the shroud of mystery around complementary pairs.
+
+\begin{thebibliography}{99}
+
+\bibitem{CraigenBCPs}R. Craigen, Boolean complementary pairs, \textit{J. Combin. Theory Ser. A} $\mathbf{104}$ (2003), 1-16. 
+
+
+\end{thebibliography}
+
+\end{document}
